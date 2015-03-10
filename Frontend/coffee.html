@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			body {
+			margin: 0px;
+			padding: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="200" height="200"></canvas>
+		<canvas id="myCanvas2" width="240" height="240"></canvas>
+		<!-- <script src="./js/CoffeePot.js"></script> -->
+
+		<input id="inputSize" type="number" value="200">
+		<button onclick="changeSize()">change</button>
+		<p id="yks"></p>
+		<p id="kaks"></p>
+
+		<script>
+			var canvas = document.getElementById('myCanvas');
+			drawPot(canvas, 200);
+			fillPot(canvas, 66);
+			
+			var canvas2 = document.getElementById('myCanvas2');
+			//drawPot(canvas2, 200);
+			//fillPot(canvas2, 50);
+			
+			document.getElementById("yks").innerHTML = "Moi";
+
+			function drawPot(canvas) {
+				var context = canvas.getContext('2d');
+				var lineThickness = 10;
+				var cornerSize = 35;
+				context.beginPath();
+				//yläreuna
+				context.moveTo((cornerSize),lineThickness);
+				context.lineTo((canvas.width-cornerSize),lineThickness);
+				//oikea yläkulma
+				context.arcTo((canvas.width-lineThickness),lineThickness,(canvas.width-lineThickness),cornerSize,(cornerSize-lineThickness));
+				//oikea reuna
+				context.lineTo((canvas.height-lineThickness),(canvas.height-cornerSize));
+				//oikea alakulma
+				context.arcTo((canvas.width-lineThickness),(canvas.height-lineThickness),(canvas.width-cornerSize),(canvas.height-lineThickness),(cornerSize-lineThickness));
+				//alareuna
+				context.lineTo((cornerSize+lineThickness),(canvas.height-lineThickness));
+				//vasen alakulma
+				context.arcTo(lineThickness,(canvas.height-lineThickness),lineThickness,(canvas.height-cornerSize-lineThickness),(cornerSize-lineThickness));
+				//vasen reuna
+				context.lineTo(lineThickness,cornerSize);
+				//vasen yläkulma
+				context.arcTo(lineThickness,lineThickness,(cornerSize-lineThickness),lineThickness,(cornerSize-lineThickness));
+				context.lineWidth = lineThickness*2;
+				context.stroke();
+				context.fillStyle="white";
+				context.fill();
+				context.save();
+			}
+
+			function fillPot(canvas, percentage) {
+				var context = canvas.getContext('2d');
+				context.clip();
+				context.fillStyle="black";
+				context.fillRect(0, (100-percentage)/100*canvas.height, canvas.width, canvas.height);
+				
+				document.getElementById("kaks").innerHTML = canvas.width;
+			}
+			
+			function changeSize() {
+				var newSize = document.getElementById("inputSize").value;
+				//1document.getElementById("yks").innerHTML = newSize;
+				document.getElementById("myCanvas").getContext("2d").restore();
+			}
+
+		</script>
+	</body>
+</html>
