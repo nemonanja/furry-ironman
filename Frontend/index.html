@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+        <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+        <script type="text/javascript" src="./js/logic.js"></script>
+        <script type="text/javascript" src="./js/coffeepot.js"></script>
+        <title>Smart Coffee Monitor</title>
+    </head>
+    <body>
+        <table id="normalview">
+            <tr>
+                <td class="header" colspan="3">
+                    <h1>Hello Moccamaster!</h1>
+                </td>
+            </tr>
+            <tr>
+                <td class="narrow">
+                    <p class="amount text-center text-values">Loading...</p>
+                    <p class="text-center text-addinfo">coffee left in the pot.</p>
+                </td>
+                <td>
+                    <canvas id="pot"></canvas>
+                </td>
+                <td class="narrow">
+                    <p id="temp" class="text-center text-values temp">Loading...</p>
+                    <p class="text-center text-addinfo">is the pot's temperature.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p id="status" class="text-center status">Loading status...</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p id="chart" class="text-center chart"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="text-silent">Purple Software Ltd.</p>
+                </td>
+            </tr>
+        </table>
+
+        
+        <table id="altview">
+            <tr>
+                <td class="header" colspan="2">
+                    <h1>Hello Moccamaster!</h1>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img class="img_fit" src="./temp_img/pot.jpg">
+                </td>
+            </tr>
+            <tr>
+                <td class="narrow">
+                    <p class="text-center text-values amount">Loading...</p>
+                    <p class="text-center text-addinfo">coffee left in the pot.</p>
+                </td>
+                <td class="narrow">
+                    <p class="text-center text-values temp">Loading...</p>
+                    <p class="text-center text-addinfo">is the pot's temperature.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="text-center status">Loading status...</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="text-center chart">Chart here</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="text-silent">Purple Software Ltd.</p>
+                </td>
+            </tr>
+        </table>
+
+        <button id="btn">Namiska</button>
+        <label id="lbl"></label>
+    </body>
+</html>
