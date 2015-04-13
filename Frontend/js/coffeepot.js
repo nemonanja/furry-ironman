@@ -5,7 +5,10 @@ function drawPot(canvas) {
     var l = 2; //line thickness
 	var c = 50; //corner size
 
+	//clear the canvas
+	ctx.clearRect(0, 0, w, h);
 	//draw the handle
+	ctx.beginPath();
 	ctx.moveTo(0.63*w, 0.19*h);
 	ctx.lineTo(0.84*w, 0.15*h);
 	ctx.lineTo(0.91*w, 0.73*h);
@@ -13,7 +16,8 @@ function drawPot(canvas) {
 	ctx.lineTo(0.78*w, 0.30*h);
 	ctx.lineTo(0.63*w, 0.30*h);
 	ctx.lineTo(0.63*w, 0.19*h);
-	ctx.lineWidth = l;
+	ctx.closePath();
+	ctx.lineWidth = 1;
 	ctx.stroke();
 	//fill the handle
 	ctx.fillStyle = "black";
@@ -42,8 +46,8 @@ function drawPot(canvas) {
 	ctx.fillRect(0.19*w, 0.19*h, 0.44*w, 0.10*h);
 	ctx.clip();
 	//fill the pot with coffee :)
-	ctx.fillStyle = "black";
-	ctx.fillRect(0, 0.35*h, w, 0.59*h);
+	//ctx.fillStyle = "black";
+	//ctx.fillRect(0, 0.35*h, w, 0.59*h);
 }
 
 function fillPot(canvas, percentage) {
@@ -52,10 +56,5 @@ function fillPot(canvas, percentage) {
     var h = canvas.height;
     ctx.clearRect(0.10*w, 0.30*h, 0.63*w, h);
 	ctx.fillStyle = "black";
-	ctx.fillRect(0.10*w, (100-percentage)/100 *0.65*h + 0.35*h, 0.63*w, percentage/100*0.60*h);
-}
-
-function changeSize() {
-    var context = canvas.getContext('2d');
-    fillPot(canvas, document.getElementById('inputSize').value);
+	ctx.fillRect(0.10*w, (100-percentage)/100 *0.55*h + 0.39*h, 0.63*w, percentage/100*0.55*h);
 }

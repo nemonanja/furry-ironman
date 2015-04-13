@@ -3,10 +3,11 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+        <link rel="stylesheet" type="text/css" href="./css/StyleSheet.css">
         <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
-        <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+        <script language="javascript" type="text/javascript" src="./js/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="./js/jqplot.dateAxisRenderer.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/jquery.jqplot.css" />
         <script type="text/javascript" src="./js/logic.js"></script>
         <script type="text/javascript" src="./js/coffeepot.js"></script>
         <title>Smart Coffee Monitor</title>
@@ -24,7 +25,7 @@
                     <p class="text-center text-addinfo">coffee left in the pot.</p>
                 </td>
                 <td>
-                    <canvas id="pot"></canvas>
+                    <canvas id="pot" class="pot"></canvas>
                 </td>
                 <td class="narrow">
                     <p id="temp" class="text-center text-values temp">Loading...</p>
@@ -57,7 +58,12 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <img class="img_fit" src="./temp_img/pot.jpg">
+                    <canvas class="pot"></canvas>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="text-center status">Loading status...</p>
                 </td>
             </tr>
             <tr>
@@ -68,11 +74,6 @@
                 <td class="narrow">
                     <p class="text-center text-values temp">Loading...</p>
                     <p class="text-center text-addinfo">is the pot's temperature.</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <p class="text-center status">Loading status...</p>
                 </td>
             </tr>
             <tr>
