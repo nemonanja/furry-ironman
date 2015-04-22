@@ -1,76 +1,85 @@
-var plot;
-var plotDataPoints = 30;
-var plotDataAmount = [];
-var plotDataTemp = [];
+//Load Google Charts 
+google.load('visualization', '1.1', {packages: ['line']});
+
+var chart;
+var plotDataPoints = 25;
+var plotData;
+var options;
 var interval = 2;
+var redrawPlotInterval = 5;
+var redrawPlotCount = 0;
 var canvas;
+var w;
+var h;
 
-$(document).ready(function(){       	
-	setView();
-	loadStatus();
+//debugging
+var i = 1;
+//http://vm0103.virtues.fi/
+//http://ufn.virtues.fi/~virtual_currency/v2/matti.php/test/
 
+$(document).ready(function(){
+	plotData = new google.visualization.DataTable();
+	plotData.addColumn('timeofday', 'Time');
+	plotData.addColumn('number', 'Amount');
+	plotData.addColumn('number', 'Temperature');
+	options = {
+		curveType: 'function',
+		chart: {
+			title: 'History data'
+		}
+  	};
+  	options['width'] = 0.9*window.innerWidth;
+  	
 	setInterval(function(){
 		loadStatus();
 	}, interval*1000);
 
 	$(window).resize(function() {
+  		options['width'] = 0.9*window.innerWidth;
 		setView();
 	});
 
-	$("#btn").click(
-		function(){
-        	$("#btn").text(new Date($.now()));
-
-    	}
-    );
+	setView();
+	loadStatus();
 });
 
 function loadStatus() {
 	$.get("http://ufn.virtues.fi/~virtual_currency/v2/matti.php/test/", function(data) {
 		$(".amount").html(data.amount + " %");
 		$(".temp").html(data.temperature + " &deg;C");
+		$(".status").html(data.status);
 		fillPot(document.getElementById("pot"), data.amount);
 		updatePlotData(data);
-		createPlot();
+		redrawPlotCount = (redrawPlotCount += 1) % redrawPlotInterval;
+		if(redrawPlotCount == 0) {
+			createPlot();
+		}
 	}, "json");	
 }
 
 function createPlot() {
-	if (plot) {
-    	plot.destroy();
-    }
-	plot = $.jqplot("chart",  [plotDataAmount, plotDataTemp], {
-		axes: {
-			title: 'amount of coffee left',
-			yaxis: {
-				min: 0,
-				forceTickAt0: true,
-				max: 100,
-				forceTickAt100: true,
-				numberTicks: 6
-			},
-			xaxis: {
-				renderer:$.jqplot.DateAxisRenderer,
-				numberTicks: 20
-			}
-		}
-	});
+	chart = new google.charts.Line(document.getElementById('chart'));
+    chart.draw(plotData, options);	
 }
 
+
 function updatePlotData(data) {
-	if(typeof plotDataAmount != 'undefined' && plotDataAmount.length == plotDataPoints) {
-    	plotDataAmount.shift();
+	if(plotData.getNumberOfRows() == plotDataPoints) {
+		plotData.removeRow(0);
 	}
-	plotDataAmount.push([new Date(data.timestamp_unix*1000), data.amount]);
-	
-	if(typeof plotDataTemp != 'undefined' && plotDataTemp.length == plotDataPoints) {
-    	plotDataTemp.shift();
-	}
-	plotDataTemp.push([new Date(data.timestamp_unix*1000), data.temperature]);
+	var d = new Date(data.timestamp_unix*1000);
+	var time = [d.getHours(), d.getMinutes(), d.getSeconds()];
+	plotData.addRows([[time, parseInt(data.amount), parseInt(data.temperature)]]);
+
+	//console.log(plotData.getValue(0, 0));
+	//debugging
+	//i += 1;
+	//console.log(new Date(data.timestamp_unix*1000));
+	//console.log(google.visualization.dataTableToCsv(plotData));
 }
 
 function setView() {
-	$(".status").html(window.innerWidth+"x"+window.innerHeight);
+	//$(".status").html(window.innerWidth+"x"+window.innerHeight);
 	if(window.innerWidth>window.innerHeight) {
   		$("#normalview").css("display", "table");
   		$("#altview").css("display", "none");
@@ -95,11 +104,9 @@ function setView() {
   		}
   	});
   	
-    canvas = document.getElementById("pot");
+	canvas = document.getElementById("pot");
   	$("#pot").height($("#pot").width() * 0.76);
   	drawPot(canvas);
-  	
-  	if(typeof plotDataAmount != 'undefined' && plotDataAmount.length > 0) {
-  		createPlot();
-  	}
+  		
+	createPlot();
 }

@@ -1,3 +1,5 @@
+//Function to draw the pot. The canvas passed on should have aspect ratio of 21:16 but it will work with others too.
+//The pot drawing is based on relative coordinates from upper left corner.
 function drawPot(canvas) {
     var ctx = canvas.getContext("2d");
     var w = canvas.width;
@@ -17,7 +19,7 @@ function drawPot(canvas) {
 	ctx.lineTo(0.63*w, 0.30*h);
 	ctx.lineTo(0.63*w, 0.19*h);
 	ctx.closePath();
-	ctx.lineWidth = 1;
+	ctx.lineWidth = 1; //the handle is filled, therefore lineWidth 1 is the best option
 	ctx.stroke();
 	//fill the handle
 	ctx.fillStyle = "black";
@@ -41,15 +43,15 @@ function drawPot(canvas) {
 	ctx.lineTo(0.19*w, 0.19*h);
 	ctx.lineWidth = l;
 	ctx.stroke();
-	//create the metal bar
+	//Create the metal bar to the upper part of the pot.
 	ctx.fillStyle = "grey";
 	ctx.fillRect(0.19*w, 0.19*h, 0.44*w, 0.10*h);
+	//Clip the current drawing to hide the rest of the fillRect when the pot is filled.
 	ctx.clip();
-	//fill the pot with coffee :)
-	//ctx.fillStyle = "black";
-	//ctx.fillRect(0, 0.35*h, w, 0.59*h);
 }
 
+//Function to fill the drawn pot. The pot fill value should be from 0 to 100. 
+//When the pot is full (100%) it will be filled to the corner that is little lower than the metal bar.
 function fillPot(canvas, percentage) {
     var ctx = canvas.getContext("2d");
     var w = canvas.width;

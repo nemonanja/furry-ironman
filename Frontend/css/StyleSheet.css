@@ -1,24 +1,25 @@
+body {
+    font-family: "Arial";
+    color: #04324E;
+    background-color: 'white';
+}
+
 table {
     margin-left: auto; 
     margin-right: auto;
     width: 100%;
     max-width: 1440px;
-    font-family: "Comic Sans MS";
 }
 
 canvas {
     width: 100%;
 }
 
-tr, td {
-    border-width: 2px;
-    border-style: solid;
-}
-
-#normalview {
-}
-
-#altview {
+h1 {
+    text-align: center;
+    color: #04324E;
+    font-size: 56px;
+    margin: 10px 0px;
 }
 
 .narrow {
@@ -26,10 +27,7 @@ tr, td {
 }
 
 .header {
-    text-align: center;
     height: 100%;
-    border-bottom-width: 3px;
-    border-style: solid;
 }
 
 .img_fit {
@@ -38,19 +36,20 @@ tr, td {
 }
 
 .text-addinfo {
-    font-size: 16px;
+    font-size: 28px;
+    margin: 10px 0px;
 }
 
 .text-values {
-    font-size: 56px;
+    margin: 10px 0px;
+    font-size: 72px;
 }
 
-#status {
-
-}
-
-#chart {
+.chart {
     height: 200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .text-center {
@@ -58,5 +57,5 @@ tr, td {
 }
 
 .text-silent {
-    color: #cfcdcd;
+    color: #5F7A8A;
 }
