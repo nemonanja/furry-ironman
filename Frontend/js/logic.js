@@ -44,7 +44,7 @@ $(document).ready(function(){
 });
 
 function loadStatus() {
-	$.get("http://ufn.virtues.fi/~virtual_currency/v2/matti.php/test/", function(data) {
+	$.get("http://vm0103.virtues.fi/", function(data) {
 		$(".amount").html(data.amount + " %");
 		$(".temp").html(data.temperature + " &deg;C");
 		$(".status").html(data.status);
@@ -67,7 +67,7 @@ function updatePlotData(data) {
 	if(plotData.getNumberOfRows() == plotDataPoints) {
 		plotData.removeRow(0);
 	}
-	var d = new Date(data.timestamp_unix*1000);
+	var d = new Date(data.timestamp*1000);
 	var time = [d.getHours(), d.getMinutes(), d.getSeconds()];
 	plotData.addRows([[time, parseInt(data.amount), parseInt(data.temperature)]]);
 
