@@ -1,6 +1,6 @@
 body {
     font-family: "Arial";
-    color: #04324E;
+    color: #000000;
     background-color: 'white';
 }
 
@@ -17,7 +17,7 @@ canvas {
 
 h1 {
     text-align: center;
-    color: #04324E;
+    color: #000000;
     font-size: 56px;
     margin: 10px 0px;
 }

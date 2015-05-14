@@ -58,5 +58,5 @@ function fillPot(canvas, percentage) {
     var h = canvas.height;
     ctx.clearRect(0.10*w, 0.30*h, 0.63*w, h);
 	ctx.fillStyle = "black";
-	ctx.fillRect(0.10*w, (100-percentage)/100 *0.55*h + 0.39*h, 0.63*w, percentage/100*0.55*h);
+	ctx.fillRect(0.10*w, (100-percentage)/100 *0.59*h + 0.34*h, 0.63*w, percentage/100*0.63*h);
 }

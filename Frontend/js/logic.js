@@ -1,8 +1,11 @@
 //Load Google Charts 
 google.load('visualization', '1.1', {packages: ['line']});
 
+//API endpoint
+var endpoint = "http://vm0103.virtues.fi/";
+
 //Plotting options
-var interval = 2; //interval in seconds between each data fetch
+var interval = 3; //interval in seconds between each data fetch
 var plotDataPoints = 100; //max number of datapoints in plot
 var redrawPlotInterval = 5; //how many data fetches are needed before the plot is redrawn
 
@@ -40,25 +43,43 @@ $(document).ready(function(){
 
 	//Set view and fetch current status
 	setView();
-	loadStatus();
+
+  	//Get data history and plot if data exists
+	loadHistory();
+	if (plotData.getNumberOfRows() > 0) {
+		createPlot();
+	}
 });
 
-//ACTUAL
-//http://vm0103.virtues.fi/
+function loadHistory() {
+	//AJAX query to fetch previous data to initialize plot
+	$.get(endpoint+"history", function(data) {
+		
+		//Remove oldest data points if there are more data than max data points
+		while(data.length > plotDataPoints) {
+			data.pop();
+		}
 
-//FOR TESTING PURPOSES (change timestamp to timestamp_unix)
-//http://ufn.virtues.fi/~virtual_currency/v2/matti.php/test/
+		//Add data points from oldest to latest
+		while(data.length > 0) {
+			updatePlotData(data.pop());
+		}
+	}, "json");		
+}
 
 function loadStatus() {
 	//AJAX query to fetch status
-	$.get("http://vm0103.virtues.fi/", function(data) {
+	$.get(endpoint, function(data) {
+		
 		//Set values to correct fields
 		$(".amount").html(data.amount + " %");
 		$(".temp").html(data.temperature + " &deg;C");
 		$(".status").html(data.status);
+		
 		//Fill the pot
 		fillPot(document.getElementById("pot"), data.amount);
 		updatePlotData(data);
+		
 		//Count if enough data fetches are done for plot to be redrawn
 		//and redraw if true
 		redrawPlotCount = (redrawPlotCount += 1) % redrawPlotInterval;
@@ -69,9 +90,9 @@ function loadStatus() {
 }
 
 function createPlot() {
-	//reinitialize chart variable each time to ensure functionality when screen size is changed
+	//Reinitialize chart variable each time to ensure functionality when screen size is changed
 	chart = new google.charts.Line(document.getElementById('chart'));
-    chart.draw(plotData, options);	
+    chart.draw(plotData, options);
 }
 
 function updatePlotData(data) {
