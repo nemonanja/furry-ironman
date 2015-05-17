@@ -5,7 +5,7 @@ google.load('visualization', '1.1', {packages: ['line']});
 var endpoint = "http://vm0103.virtues.fi/";
 
 //Plotting options
-var interval = 3; //interval in seconds between each data fetch
+var interval = 5; //interval in seconds between each data fetch
 var plotDataPoints = 100; //max number of datapoints in plot
 var redrawPlotInterval = 5; //how many data fetches are needed before the plot is redrawn
 
@@ -97,7 +97,7 @@ function createPlot() {
 
 function updatePlotData(data) {
 	//If max number of data points stored, drop the oldest
-	if(plotData.getNumberOfRows() == plotDataPoints) {
+	while(plotData.getNumberOfRows() >= plotDataPoints) {
 		plotData.removeRow(0);
 	}
 	//Change the timestamp to timeofday format and store the data
