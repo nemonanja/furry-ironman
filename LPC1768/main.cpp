@@ -15,9 +15,9 @@
 
 // WiFi configuration (edit this)
 
-#define WIFI_SSID               "OTiT"
+#define WIFI_SSID               "SSID"
 #define WIFI_SECURITY           WPA    // NONE, WEP_128 or WPA
-#define WIFI_PASS               "oh8taoh8ta"
+#define WIFI_PASS               "password"
 
 //DHCP definition
 #define DHCP                    1
