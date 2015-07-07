@@ -1,0 +1,16 @@
+data/Socket/TCPSocketConnection.h.i
+data/Socket/Endpoint.cpp.i
+data/Wifly/Wifly.h.i
+data/Socket/TCPSocketServer.h.i
+data/Socket/Endpoint.h.i
+data/Socket/UDPSocket.h.i
+data/Wifly/CBuffer.h.i
+data/Socket/Socket.cpp.i
+data/Socket/Socket.h.i
+data/Socket/TCPSocketServer.cpp.i
+data/Wifly/Wifly.cpp.i
+data/Socket/UDPSocket.cpp.i
+data/Socket/TCPSocketConnection.cpp.i
+data/WiflyInterface.h.i
+data/WiflyInterface.cpp.i
+data/Helper/def.h.i

@@ -1,0 +1,61 @@
+body {
+    font-family: "Arial";
+    color: #000000;
+    background-color: 'white';
+}
+
+table {
+    margin-left: auto; 
+    margin-right: auto;
+    width: 100%;
+    max-width: 1440px;
+}
+
+canvas {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+    font-size: 56px;
+    margin: 10px 0px;
+}
+
+.narrow {
+    width: 30%;
+}
+
+.header {
+    height: 100%;
+}
+
+.img_fit {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-addinfo {
+    font-size: 28px;
+    margin: 10px 0px;
+}
+
+.text-values {
+    margin: 10px 0px;
+    font-size: 72px;
+}
+
+.chart {
+    height: 200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-silent {
+    color: #5F7A8A;
+}
